@@ -1,19 +1,21 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Button, TextInput, StyleSheet, CheckBox } from 'react-native';
-import { SafeAreaView } from 'react-native-web';
+import { TextInput, StyleSheet, Image } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 export default function LoginScreen() {
     return (
 
-        <View style={{ height: '100%' }}>
+        <View style={{ height: '100%', padding: 10 }}>
 
             <View style={{ height: '80%' }}>
                 <Text style={styles.title}>Log in</Text>
                 <Text style={styles.subTitle}>Please enter log in details below</Text>
                 <Text style={styles.textInputLabel}>Email</Text>
-                <TextInput style={styles.input} placeholder='Enter your Email' />
+                <TextInput style={styles.input} placeholder='Enter your mail' />
                 <Text style={styles.textInputLabel}>Password</Text>
-                <TextInput style={styles.input} placeholder='Username' />
+                <TextInput style={styles.input} placeholder='Enter your password' secureTextEntry={true} />
                 <View style={styles.rowContainer}>
                     <View style={styles.checkBoxContainer}>
                         {/* <CheckBox /> */}
@@ -21,8 +23,15 @@ export default function LoginScreen() {
                     </View>
                     <Text>Forgot Password?</Text>
                 </View>
-                <TouchableOpacity onPress={() => { }} style={styles.button}>
-                    <Text style={styles.buttonLabel}>Log in </Text>
+                <TouchableOpacity onPress={() => { }} style={styles.buttonGradient}>
+                    <LinearGradient
+                        colors={['#003973', '#005fa3']} // Customize these colors
+                        style={styles.button}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 0 }}
+                    >
+                        <Text style={styles.buttonLabel}>Log in </Text>
+                    </LinearGradient>
                 </TouchableOpacity>
                 <View style={styles.rowContainer}>
                     <View style={styles.lineStyle}></View>
@@ -31,9 +40,11 @@ export default function LoginScreen() {
                 </View>
                 <View style={styles.rowCenterContainer}>
                     <View style={styles.loginOptionCotainer}>
+                        <Image source={require('../assets/google_logo.png')} style={styles.ImageStyle} />
                         <Text>Google</Text>
                     </View>
                     <View style={styles.loginOptionCotainer}>
+                        <Image source={require('../assets/Facebook_logo.png')} style={styles.ImageStyle} />
                         <Text>Facebook</Text>
                     </View>
                 </View>
@@ -82,13 +93,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     button: {
-
+        width: '100%',
         marginVertical: 10,
         borderRadius: 10,
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'blue',
+    },
+    buttonGradient: {
+
+        borderRadius: 25,
+        alignItems: 'center',
     },
     buttonLabel: {
         color: 'white'
@@ -102,6 +118,7 @@ const styles = StyleSheet.create({
 
     },
     loginOptionCotainer: {
+        flexDirection: 'row',
         flex: 1,
         margin: 10,
         padding: 10,
@@ -110,5 +127,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 10,
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
+    },
+    ImageStyle: {
+        width: 20,
+        height: 20,
+        marginRight: 5
     }
 })
